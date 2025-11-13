@@ -1,0 +1,57 @@
+"""
+配置文件
+用于配置embedding模型和其他参数
+"""
+
+# Embedding模型配置
+EMBEDDING_CONFIG = {
+    # 模型类型: 'local' 或 'huggingface'
+    'model_type': 'local',
+    
+    # 本地模型路径（如果使用本地模型）
+    'local_model_path': '',
+    
+    # 向量维度（如果使用自定义模型，需要指定）
+    # 如果为None，会自动从模型获取
+    'vector_dimension': None,
+    
+    # 设备: 'cpu' 或 'cuda'
+    'device': 'cpu',
+}
+
+# FAISS索引配置
+FAISS_CONFIG = {
+    # 索引文件路径
+    'index_path': 'vector_index.faiss',
+    
+    # 元数据文件路径
+    'metadata_path': 'vector_metadata.pkl',
+    
+    # 索引类型: 'flat' (L2距离) 或 'ivf' (倒排索引，适合大规模数据)
+    'index_type': 'flat',
+}
+
+# 智谱AI配置
+ZHIPUAI_CONFIG = {
+    # API Key
+    'api_key': '',  # 请填写您自己的 API Key
+    
+    # 模型名称
+    'model': 'glm-4.5-flash',
+    
+    # 最大输出 tokens
+    'max_tokens': 512,
+    
+    # 温度参数（控制输出的随机性）
+    'temperature': 0.7,
+}
+
+# 其他配置
+OTHER_CONFIG = {
+    # API端口
+    'port': 8093,
+    
+    # 调试模式
+    'debug': True,
+}
+

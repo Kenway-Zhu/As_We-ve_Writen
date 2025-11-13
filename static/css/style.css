@@ -1,0 +1,718 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+body {
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    background: #000000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #1f2023;
+    font-size: 15px;
+    line-height: 1.6;
+    position: relative;
+}
+
+.seed-decoration {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    width: 120px;
+    height: 120px;
+    z-index: 1000;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: seedAnimation 13s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+.seed-decoration img,
+.seed-decoration svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 组合动画：心跳跳动 + 缓慢上下浮动 */
+/* 在最低点和最高点各跳动一次 */
+@keyframes seedAnimation {
+    /* 起始点（最高点）- 心跳跳动 */
+    0% {
+        transform: translateY(0px) scale(1);
+    }
+    2% {
+        transform: translateY(0px) scale(1.1);
+    }
+    4% {
+        transform: translateY(0px) scale(1);
+    }
+    6% {
+        transform: translateY(0px) scale(1.08);
+    }
+    8% {
+        transform: translateY(0px) scale(1);
+    }
+    /* 下降阶段 */
+    15% {
+        transform: translateY(-4px) scale(1);
+    }
+    25% {
+        transform: translateY(-8px) scale(1);
+    }
+    35% {
+        transform: translateY(-10px) scale(1);
+    }
+    /* 最低点 - 心跳跳动 */
+    45% {
+        transform: translateY(-10px) scale(1);
+    }
+    47% {
+        transform: translateY(-10px) scale(1.1);
+    }
+    49% {
+        transform: translateY(-10px) scale(1);
+    }
+    51% {
+        transform: translateY(-10px) scale(1.08);
+    }
+    53% {
+        transform: translateY(-10px) scale(1);
+    }
+    /* 上升阶段 */
+    60% {
+        transform: translateY(-8px) scale(1);
+    }
+    70% {
+        transform: translateY(-4px) scale(1);
+    }
+    80% {
+        transform: translateY(-2px) scale(1);
+    }
+    90% {
+        transform: translateY(0px) scale(1);
+    }
+    /* 回到最高点 - 心跳跳动 */
+    92% {
+        transform: translateY(0px) scale(1.1);
+    }
+    94% {
+        transform: translateY(0px) scale(1);
+    }
+    96% {
+        transform: translateY(0px) scale(1.08);
+    }
+    98% {
+        transform: translateY(0px) scale(1);
+    }
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+}
+
+.container {
+    background: #000000;
+    width: 100%;
+    max-width: 900px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.header {
+    background: #000000;
+    color: #e61093;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    color: #e61093;
+}
+
+.vector-count {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: #000000;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #e61093;
+    text-transform: uppercase;
+    z-index: 1000;
+}
+
+.vector-count span {
+    font-size: 15px;
+    margin-left: 8px;
+    color: #e61093;
+}
+
+.archive-notification {
+    display: none;
+    margin-left: 10px;
+    font-size: 12px;
+    color: #e61093;
+    opacity: 0;
+}
+
+.archive-notification.show {
+    display: inline-block;
+    animation: archiveNotificationFade 2s ease-in-out;
+}
+
+@keyframes archiveNotificationFade {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.vector-count::after {
+    content: '已写篇章：3350336';
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: rgba(200, 200, 200, 0.2);
+    text-transform: uppercase;
+    transform: scaleY(-1);
+    transform-origin: top center;
+    pointer-events: none;
+    white-space: nowrap;
+    display: block;
+    background: transparent;
+}
+
+.real-time-clock {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    padding: 10px 14px;
+    font-size: 16px;
+    color: #e61093;
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    z-index: 1000;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px #e61093;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.real-time-clock #clockTime {
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 16px;
+    color: #e61093;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    background: #000000;
+    border: none;
+}
+
+.chat-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: #e61093;
+    border: 1px solid #000000;
+}
+
+.message {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.message-time {
+    font-size: 11px;
+    color: #666666;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.message-content {
+    max-width: 75%;
+    padding: 12px 0;
+    word-wrap: break-word;
+    line-height: 1.8;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    text-align: center;
+}
+
+.message.user .message-content {
+    background: transparent;
+    color: #e0e0e0;
+}
+
+.message.assistant .message-content {
+    background: transparent;
+    color: #e61093;
+}
+
+.thinking-indicator {
+    max-width: 75%;
+    padding: 12px 0;
+    word-wrap: break-word;
+    line-height: 1.8;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    text-align: center;
+    color: #e61093;
+    opacity: 0.7;
+    font-style: italic;
+    animation: thinkingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes thinkingPulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.input-container {
+    padding: 20px 24px;
+    background: #000000;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.input-box {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e61093;
+    background: #000000;
+    color: #e61093;
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 14px;
+    outline: none;
+    text-transform: none;
+}
+
+.input-box::placeholder {
+    color: #996666;
+    text-transform: none;
+}
+
+.input-box:focus {
+    border-color: #e61093;
+    background: #0a0a0a;
+}
+
+.send-button {
+    padding: 12px 20px;
+    background: #000000;
+    color: #e61093;
+    border: 2px solid #e61093;
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.1s;
+}
+
+.send-button:hover:not(:disabled) {
+    background: #e61093;
+    color: #000000;
+}
+
+.send-button:active:not(:disabled) {
+    background: #e61093;
+    color: #000000;
+    opacity: 0.9;
+}
+
+.send-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: #000000;
+    color: #996666;
+    border-color: #996666;
+}
+
+.info-bar {
+    padding: 10px 24px;
+    background: #000000;
+    color: #e61093;
+    font-size: 13px;
+    text-align: center;
+    border-top: 1px solid #e61093;
+    text-transform: uppercase;
+}
+
+.archive-button {
+    margin-top: 12px;
+    width: 100%;
+    padding: 14px;
+    background: #000000;
+    color: #e61093;
+    border: 2px solid #e61093;
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.1s;
+}
+
+.archive-button:hover:not(:disabled) {
+    background: #e61093;
+    color: #000000;
+}
+
+.archive-button:active:not(:disabled) {
+    background: #e61093;
+    color: #000000;
+    opacity: 0.9;
+}
+
+.archive-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: #000000;
+    color: #996666;
+    border-color: #996666;
+}
+
+.loading {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border: 2px solid #000000;
+    border-top-color: transparent;
+    animation: spin 0.6s linear infinite;
+    margin-left: 8px;
+}
+
+.send-button .loading {
+    border-color: #e61093;
+    border-top-color: transparent;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 书页样式 - 纸张效果 */
+.book-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 2000;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.book-page.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.book-page.slide-out {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.book-page-content {
+    width: 100%;
+    max-width: 700px;
+    min-height: 500px;
+    background: #000000;
+    padding: 60px 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 2px solid #e61093;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* 像素风格的破旧边框效果 */
+.book-page-content::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background-image: /* 上边框像素点 */ repeating-linear-gradient(to right,
+    transparent 0px, transparent 8px,
+    #e61093 8px, #e61093 10px,
+    transparent 10px, transparent 18px,
+    #e61093 18px, #e61093 20px,
+    transparent 20px, transparent 28px,
+    #e61093 28px, #e61093 30px,
+    transparent 30px, transparent 38px,
+    #e61093 38px, #e61093 40px,
+    transparent 40px, transparent 48px,
+    #e61093 48px, #e61093 50px,
+    transparent 50px, transparent 58px,
+    #e61093 58px, #e61093 60px,
+    transparent 60px, transparent 68px,
+    #e61093 68px, #e61093 70px,
+    transparent 70px, transparent 78px,
+    #e61093 78px, #e61093 80px,
+    transparent 80px, transparent 88px,
+    #e61093 88px, #e61093 90px,
+    transparent 90px, transparent 98px,
+    #e61093 98px, #e61093 100px,
+    transparent 100px, transparent 108px,
+    #e61093 108px, #e61093 110px,
+    transparent 110px, transparent 118px,
+    #e61093 118px, #e61093 120px,
+    transparent 120px, transparent 128px,
+    #e61093 128px, #e61093 130px,
+    transparent 130px, transparent 138px,
+    #e61093 138px, #e61093 140px,
+    transparent 140px, transparent 148px,
+    #e61093 148px, #e61093 150px,
+    transparent 150px, transparent 100%
+    ),
+        /* 下边框像素点 */ repeating-linear-gradient(to right,
+            transparent 0px, transparent 12px,
+            #e61093 12px, #e61093 14px,
+            transparent 14px, transparent 22px,
+            #e61093 22px, #e61093 24px,
+            transparent 24px, transparent 32px,
+            #e61093 32px, #e61093 34px,
+            transparent 34px, transparent 42px,
+            #e61093 42px, #e61093 44px,
+            transparent 44px, transparent 52px,
+            #e61093 52px, #e61093 54px,
+            transparent 54px, transparent 62px,
+            #e61093 62px, #e61093 64px,
+            transparent 64px, transparent 72px,
+            #e61093 72px, #e61093 74px,
+            transparent 74px, transparent 82px,
+            #e61093 82px, #e61093 84px,
+            transparent 84px, transparent 92px,
+            #e61093 92px, #e61093 94px,
+            transparent 94px, transparent 102px,
+            #e61093 102px, #e61093 104px,
+            transparent 104px, transparent 112px,
+            #e61093 112px, #e61093 114px,
+            transparent 114px, transparent 122px,
+            #e61093 122px, #e61093 124px,
+            transparent 124px, transparent 132px,
+            #e61093 132px, #e61093 134px,
+            transparent 134px, transparent 142px,
+            #e61093 142px, #e61093 144px,
+            transparent 144px, transparent 152px,
+            #e61093 152px, #e61093 154px,
+            transparent 154px, transparent 100%
+    ),
+        /* 左边框像素点 */ repeating-linear-gradient(to bottom,
+            transparent 0px, transparent 15px,
+            #e61093 15px, #e61093 17px,
+            transparent 17px, transparent 25px,
+            #e61093 25px, #e61093 27px,
+            transparent 27px, transparent 35px,
+            #e61093 35px, #e61093 37px,
+            transparent 37px, transparent 45px,
+            #e61093 45px, #e61093 47px,
+            transparent 47px, transparent 55px,
+            #e61093 55px, #e61093 57px,
+            transparent 57px, transparent 65px,
+            #e61093 65px, #e61093 67px,
+            transparent 67px, transparent 75px,
+            #e61093 75px, #e61093 77px,
+            transparent 77px, transparent 85px,
+            #e61093 85px, #e61093 87px,
+            transparent 87px, transparent 95px,
+            #e61093 95px, #e61093 97px,
+            transparent 97px, transparent 105px,
+            #e61093 105px, #e61093 107px,
+            transparent 107px, transparent 115px,
+            #e61093 115px, #e61093 117px,
+            transparent 117px, transparent 125px,
+            #e61093 125px, #e61093 127px,
+            transparent 127px, transparent 135px,
+            #e61093 135px, #e61093 137px,
+            transparent 137px, transparent 145px,
+            #e61093 145px, #e61093 147px,
+            transparent 147px, transparent 155px,
+            #e61093 155px, #e61093 157px,
+            transparent 157px, transparent 165px,
+            #e61093 165px, #e61093 167px,
+            transparent 167px, transparent 175px,
+            #e61093 175px, #e61093 177px,
+            transparent 177px, transparent 185px,
+            #e61093 185px, #e61093 187px,
+            transparent 187px, transparent 195px,
+            #e61093 195px, #e61093 197px,
+            transparent 197px, transparent 100%
+    ),
+        /* 右边框像素点 */ repeating-linear-gradient(to bottom,
+            transparent 0px, transparent 18px,
+            #e61093 18px, #e61093 20px,
+            transparent 20px, transparent 28px,
+            #e61093 28px, #e61093 30px,
+            transparent 30px, transparent 38px,
+            #e61093 38px, #e61093 40px,
+            transparent 40px, transparent 48px,
+            #e61093 48px, #e61093 50px,
+            transparent 50px, transparent 58px,
+            #e61093 58px, #e61093 60px,
+            transparent 60px, transparent 68px,
+            #e61093 68px, #e61093 70px,
+            transparent 70px, transparent 78px,
+            #e61093 78px, #e61093 80px,
+            transparent 80px, transparent 88px,
+            #e61093 88px, #e61093 90px,
+            transparent 90px, transparent 98px,
+            #e61093 98px, #e61093 100px,
+            transparent 100px, transparent 108px,
+            #e61093 108px, #e61093 110px,
+            transparent 110px, transparent 118px,
+            #e61093 118px, #e61093 120px,
+            transparent 120px, transparent 128px,
+            #e61093 128px, #e61093 130px,
+            transparent 130px, transparent 138px,
+            #e61093 138px, #e61093 140px,
+            transparent 140px, transparent 148px,
+            #e61093 148px, #e61093 150px,
+            transparent 150px, transparent 158px,
+            #e61093 158px, #e61093 160px,
+            transparent 160px, transparent 168px,
+            #e61093 168px, #e61093 170px,
+            transparent 170px, transparent 178px,
+            #e61093 178px, #e61093 180px,
+            transparent 180px, transparent 188px,
+            #e61093 188px, #e61093 190px,
+            transparent 190px, transparent 100%
+    );
+    background-size: 100% 2px, 100% 2px, 2px 100%, 2px 100%;
+    background-position: top, bottom, left, right;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 1;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.book-page-title {
+    font-size: 18px;
+    color: #e61093;
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e61093;
+    padding-bottom: 20px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.book-page-text {
+    font-size: 14px;
+    line-height: 2;
+    color: #e0e0e0;
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    text-align: center;
+    width: 100%;
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.book-page-number {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 12px;
+    color: #e0e0e0;
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+.book-page-number.visible {
+    opacity: 1;
+}
+

@@ -1,0 +1,178 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <!-- 发光效果 -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- 中心强光 - 使用粉红色调 -->
+    <radialGradient id="centerGlow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#ff80d0" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#e61093" stop-opacity="0.7"/>
+      <stop offset="75%" stop-color="#c01073" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#a01053" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- 立方体渐变 - 使用粉红色调 -->
+    <linearGradient id="cubeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff80d0" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#e61093" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c01073" stop-opacity="0.85"/>
+    </linearGradient>
+    
+    <!-- 立方体亮面渐变 -->
+    <linearGradient id="cubeLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffa0e0" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ff80d0" stop-opacity="0.8"/>
+    </linearGradient>
+    
+    <!-- 立方体阴影面渐变 -->
+    <linearGradient id="cubeShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c01073" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#a01053" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景光晕 -->
+  <circle cx="100" cy="100" r="55" fill="url(#centerGlow)" opacity="0.7"/>
+  
+  <!-- 主立方体群组 - 整体轮廓近似正方体 -->
+  <g transform="translate(100, 100)">
+    <!-- 中心立方体（最亮，最大） -->
+    <g filter="url(#glow)">
+      <!-- 立方体前面 -->
+      <polygon points="-10,-10 10,-10 10,10 -10,10" fill="#ffffff" opacity="0.95"/>
+      <!-- 立方体顶面 -->
+      <polygon points="-10,-10 10,-10 5,-15 -5,-15" fill="url(#cubeLight)"/>
+      <!-- 立方体右侧 -->
+      <polygon points="10,-10 10,10 15,5 15,-5" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 正方体的8个角位置立方体，形成正方体轮廓 -->
+    <!-- 前上左 -->
+    <g transform="translate(-18, -18)">
+      <polygon points="-5,-5 5,-5 5,5 -5,5" fill="url(#cubeGradient)"/>
+      <polygon points="-5,-5 5,-5 2.5,-7.5 -2.5,-7.5" fill="url(#cubeLight)"/>
+      <polygon points="5,-5 5,5 7.5,2.5 7.5,-2.5" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 前上右 -->
+    <g transform="translate(18, -18)">
+      <polygon points="-5,-5 5,-5 5,5 -5,5" fill="url(#cubeGradient)"/>
+      <polygon points="-5,-5 5,-5 2.5,-7.5 -2.5,-7.5" fill="url(#cubeLight)"/>
+      <polygon points="5,-5 5,5 7.5,2.5 7.5,-2.5" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 前下左 -->
+    <g transform="translate(-18, 18)">
+      <polygon points="-5,-5 5,-5 5,5 -5,5" fill="url(#cubeGradient)"/>
+      <polygon points="-5,-5 5,-5 2.5,-7.5 -2.5,-7.5" fill="url(#cubeLight)"/>
+      <polygon points="5,-5 5,5 7.5,2.5 7.5,-2.5" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 前下右 -->
+    <g transform="translate(18, 18)">
+      <polygon points="-5,-5 5,-5 5,5 -5,5" fill="url(#cubeGradient)"/>
+      <polygon points="-5,-5 5,-5 2.5,-7.5 -2.5,-7.5" fill="url(#cubeLight)"/>
+      <polygon points="5,-5 5,5 7.5,2.5 7.5,-2.5" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 后上左（稍小，营造深度） -->
+    <g transform="translate(-15, -15)" opacity="0.7">
+      <polygon points="-4,-4 4,-4 4,4 -4,4" fill="url(#cubeGradient)"/>
+      <polygon points="-4,-4 4,-4 2,-6 -2,-6" fill="url(#cubeLight)"/>
+      <polygon points="4,-4 4,4 6,2 6,-2" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 后上右 -->
+    <g transform="translate(15, -15)" opacity="0.7">
+      <polygon points="-4,-4 4,-4 4,4 -4,4" fill="url(#cubeGradient)"/>
+      <polygon points="-4,-4 4,-4 2,-6 -2,-6" fill="url(#cubeLight)"/>
+      <polygon points="4,-4 4,4 6,2 6,-2" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 后下左 -->
+    <g transform="translate(-15, 15)" opacity="0.7">
+      <polygon points="-4,-4 4,-4 4,4 -4,4" fill="url(#cubeGradient)"/>
+      <polygon points="-4,-4 4,-4 2,-6 -2,-6" fill="url(#cubeLight)"/>
+      <polygon points="4,-4 4,4 6,2 6,-2" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 后下右 -->
+    <g transform="translate(15, 15)" opacity="0.7">
+      <polygon points="-4,-4 4,-4 4,4 -4,4" fill="url(#cubeGradient)"/>
+      <polygon points="-4,-4 4,-4 2,-6 -2,-6" fill="url(#cubeLight)"/>
+      <polygon points="4,-4 4,4 6,2 6,-2" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 填充立方体，增强正方体轮廓 -->
+    <!-- 前表面中间位置 -->
+    <g transform="translate(0, -18)">
+      <polygon points="-6,-4 6,-4 6,4 -6,4" fill="url(#cubeGradient)" opacity="0.85"/>
+      <polygon points="-6,-4 6,-4 3,-7 -3,-7" fill="url(#cubeLight)"/>
+      <polygon points="6,-4 6,4 9,1 9,-1" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <g transform="translate(0, 18)">
+      <polygon points="-6,-4 6,-4 6,4 -6,4" fill="url(#cubeGradient)" opacity="0.85"/>
+      <polygon points="-6,-4 6,-4 3,-7 -3,-7" fill="url(#cubeLight)"/>
+      <polygon points="6,-4 6,4 9,1 9,-1" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <g transform="translate(-18, 0)">
+      <polygon points="-4,-6 4,-6 4,6 -4,6" fill="url(#cubeGradient)" opacity="0.85"/>
+      <polygon points="-4,-6 4,-6 2,-9 -2,-9" fill="url(#cubeLight)"/>
+      <polygon points="4,-6 4,6 7,3 7,-3" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <g transform="translate(18, 0)">
+      <polygon points="-4,-6 4,-6 4,6 -4,6" fill="url(#cubeGradient)" opacity="0.85"/>
+      <polygon points="-4,-6 4,-6 2,-9 -2,-9" fill="url(#cubeLight)"/>
+      <polygon points="4,-6 4,6 7,3 7,-3" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 更多小立方体填充 -->
+    <g transform="translate(-10, -10)">
+      <polygon points="-3,-3 3,-3 3,3 -3,3" fill="url(#cubeGradient)" opacity="0.8"/>
+    </g>
+    
+    <g transform="translate(10, -10)">
+      <polygon points="-3,-3 3,-3 3,3 -3,3" fill="url(#cubeGradient)" opacity="0.8"/>
+    </g>
+    
+    <g transform="translate(-10, 10)">
+      <polygon points="-3,-3 3,-3 3,3 -3,3" fill="url(#cubeGradient)" opacity="0.8"/>
+    </g>
+    
+    <g transform="translate(10, 10)">
+      <polygon points="-3,-3 3,-3 3,3 -3,3" fill="url(#cubeGradient)" opacity="0.8"/>
+    </g>
+    
+    <!-- 分离的立方体 - 向上漂浮 -->
+    <g transform="translate(25, -30)" opacity="0.7">
+      <polygon points="-5,-5 5,-5 5,5 -5,5" fill="url(#cubeGradient)"/>
+      <polygon points="-5,-5 5,-5 2.5,-7.5 -2.5,-7.5" fill="url(#cubeLight)"/>
+      <polygon points="5,-5 5,5 7.5,2.5 7.5,-2.5" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 分离的立方体 - 向右上漂浮 -->
+    <g transform="translate(32, -25)" opacity="0.6">
+      <polygon points="-4,-4 4,-4 4,4 -4,4" fill="url(#cubeGradient)"/>
+      <polygon points="-4,-4 4,-4 2,-6 -2,-6" fill="url(#cubeLight)"/>
+      <polygon points="4,-4 4,4 6,2 6,-2" fill="url(#cubeShadow)"/>
+    </g>
+    
+    <!-- 分离的立方体 - 向右漂浮 -->
+    <g transform="translate(30, 5)" opacity="0.65">
+      <polygon points="-4,-4 4,-4 4,4 -4,4" fill="url(#cubeGradient)"/>
+      <polygon points="-4,-4 4,-4 2,-6 -2,-6" fill="url(#cubeLight)"/>
+      <polygon points="4,-4 4,4 6,2 6,-2" fill="url(#cubeShadow)"/>
+    </g>
+  </g>
+</svg>
+

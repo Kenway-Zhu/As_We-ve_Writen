@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如我们所书</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="vector-count">
+        已写篇章: <span id="vectorCount">0</span>
+        <span class="archive-notification" id="archiveNotification" style="display: none;">已归档...</span>
+    </div>
+    <div class="real-time-clock" id="realTimeClock">
+        <span id="clockTime">00:00:00</span>
+    </div>
+    <div class="seed-decoration">
+        <img src="{{ url_for('static', filename='images/seed.svg') }}" alt="种子">
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>Philia093</h1>
+        </div>
+        
+        <div class="info-bar" id="infoBar">
+            剩余对话次数: <span id="remainingCount">10</span>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="message assistant" id="welcomeMessage">
+                <div class="message-time" id="welcomeTime"></div>
+                <div class="message-content">
+                    ♪
+                </div>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    class="input-box" 
+                    placeholder="输入消息..."
+                    maxlength="1000"
+                >
+                <button id="sendButton" class="send-button">发送</button>
+            </div>
+            <button id="archiveButton" class="archive-button" disabled>结束对话并归档</button>
+        </div>
+    </div>
+
+    <!-- 书页 -->
+    <div class="book-page" id="bookPage">
+        <div class="book-page-content">
+            <div class="book-page-title">如我们所书</div>
+            <div class="book-page-text" id="bookPageText"></div>
+            <div class="book-page-number" id="bookPageNumber"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+
