@@ -2,7 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>如我们所书</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -14,16 +16,57 @@
     <div class="real-time-clock" id="realTimeClock">
         <span id="clockTime">00:00:00</span>
     </div>
+    <div class="music-controls">
+        <button id="morseMusicButton" class="morse-music-button" onclick="toggleMorseMusic()" title="播放/暂停">
+            <span class="play-icon">▶</span>
+            <span class="pause-icon" style="display: none;">⏸</span>
+        </button>
+        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50" oninput="changeVolume(this.value)" title="音量">
+    </div>
+    <button id="commentBoardToggle" class="comment-board-toggle" onclick="toggleCommentBoard()" title="注释">注释</button>
     <div class="seed-decoration">
         <img src="{{ url_for('static', filename='images/seed.svg') }}" alt="种子">
     </div>
+    
+    <!-- 留言板 - 只保留输入框 -->
+    <div class="comment-board" id="commentBoard">
+        <div class="comment-board-header">
+            <h2>注释</h2>
+            <button class="comment-board-close" onclick="toggleCommentBoard()" title="关闭">×</button>
+        </div>
+        <div class="comment-board-input">
+            <input 
+                type="text" 
+                id="commentInput" 
+                class="comment-input" 
+                placeholder="输入留言..."
+                maxlength="200"
+            >
+            <button id="commentSubmitButton" class="comment-submit-button">提交</button>
+        </div>
+    </div>
+    
+    <!-- 全屏摩斯密码展示区域 -->
+    <div class="morse-display" id="morseDisplay">
+        <!-- 摩斯密码将在这里自动滚动显示 -->
+    </div>
+    
     <div class="container">
         <div class="header">
             <h1>Philia093</h1>
         </div>
         
         <div class="info-bar" id="infoBar">
-            剩余对话次数: <span id="remainingCount">10</span>
+            <div class="progress-container" id="progressContainer" style="display: none;">
+                <span class="progress-label">删除中</span>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <span class="progress-percent" id="progressPercent">0%</span>
+            </div>
+            <div class="remaining-count-display" id="remainingCountDisplay">
+                剩余对话次数: <span id="remainingCount">10</span>
+            </div>
         </div>
 
         <div class="chat-container" id="chatContainer">
@@ -46,7 +89,7 @@
                 >
                 <button id="sendButton" class="send-button">发送</button>
             </div>
-            <button id="archiveButton" class="archive-button" disabled>结束对话并归档</button>
+            <button id="archiveButton" class="archive-button" disabled>故事讲完啦～</button>
         </div>
     </div>
 

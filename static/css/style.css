@@ -8,15 +8,16 @@
 }
 
 body {
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
-    background: #000000;
+    font-family: monospace;
+    background: #171717FF;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     padding: 20px;
+    gap: 20px;
     color: #1f2023;
-    font-size: 15px;
+    font-size: 19.5px;
     line-height: 1.6;
     position: relative;
 }
@@ -117,8 +118,178 @@ body {
     }
 }
 
+/* 注释板切换按钮 */
+.comment-board-toggle {
+    position: fixed;
+    right: 20px;
+    top: 120px;
+    background: #171717FF;
+    border: none;
+    color: #e61093;
+    padding: 10px 14px;
+    font-size: 16.9px;
+    font-family: monospace;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+.comment-board-toggle:hover {
+    background: #e61093;
+    color: #171717FF;
+}
+
+.comment-board-toggle:active {
+    background: #e61093;
+    color: #171717FF;
+    opacity: 0.9;
+}
+
+/* 留言板 */
+.comment-board {
+    position: fixed;
+    right: -420px;
+    top: 120px;
+    width: 400px;
+    height: auto;
+    background: #171717FF;
+    border: 1px solid rgba(230, 16, 147, 0.3);
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.comment-board.show {
+    right: 20px;
+}
+
+.comment-board-header {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(230, 16, 147, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.comment-board-close {
+    background: transparent;
+    border: none;
+    color: rgba(230, 16, 147, 0.6);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.comment-board-close:hover {
+    color: #e61093;
+}
+
+.comment-board-header h2 {
+    font-size: 16px;
+    color: #e61093;
+    font-weight: normal;
+    margin: 0;
+    font-family: monospace;
+}
+
+/* 全屏摩斯密码展示区域 */
+.morse-display {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.morse-scroll-text {
+    position: absolute;
+    white-space: pre-line;
+    font-family: monospace;
+    font-size: 18px;
+    color: #555555;
+    letter-spacing: 2px;
+    line-height: 1.8;
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+    /* 动画由JavaScript动态设置 */
+    transform: translateY(100vh);
+    will-change: transform;
+}
+
+@keyframes morseScrollUp {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.comment-board-input {
+    padding: 12px 15px;
+    border-top: 1px solid rgba(230, 16, 147, 0.3);
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 8px 12px;
+    background: rgba(230, 16, 147, 0.05);
+    border: 1px solid rgba(230, 16, 147, 0.3);
+    color: #e61093;
+    font-family: monospace;
+    font-size: 12px;
+    outline: none;
+}
+
+.comment-input:focus {
+    border-color: rgba(230, 16, 147, 0.6);
+    background: rgba(230, 16, 147, 0.1);
+}
+
+.comment-submit-button {
+    padding: 8px 16px;
+    background: rgba(230, 16, 147, 0.2);
+    border: 1px solid rgba(230, 16, 147, 0.3);
+    color: #e61093;
+    font-family: monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.comment-submit-button:hover {
+    background: rgba(230, 16, 147, 0.3);
+    border-color: rgba(230, 16, 147, 0.5);
+}
+
+.comment-submit-button:active {
+    transform: scale(0.95);
+}
+
+.comment-submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .container {
-    background: #000000;
+    background: #171717FF;
     width: 100%;
     max-width: 900px;
     height: 90vh;
@@ -126,19 +297,22 @@ body {
     flex-direction: column;
     overflow: hidden;
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .header {
-    background: #000000;
+    background: #171717FF;
     color: #e61093;
     padding: 20px 24px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .header h1 {
-    font-size: 18px;
+    font-size: 23.4px;
     font-weight: normal;
     letter-spacing: 0.5px;
     text-transform: none;
@@ -149,16 +323,16 @@ body {
     position: fixed;
     top: 70px;
     right: 20px;
-    background: #000000;
+    background: #171717FF;
     padding: 10px 14px;
-    font-size: 13px;
+    font-size: 16.9px;
     color: #e61093;
     text-transform: uppercase;
     z-index: 1000;
 }
 
 .vector-count span {
-    font-size: 15px;
+    font-size: 19.5px;
     margin-left: 8px;
     color: #e61093;
 }
@@ -166,7 +340,7 @@ body {
 .archive-notification {
     display: none;
     margin-left: 10px;
-    font-size: 12px;
+    font-size: 15.6px;
     color: #e61093;
     opacity: 0;
 }
@@ -198,7 +372,7 @@ body {
     left: 0;
     right: 0;
     padding: 10px 14px;
-    font-size: 13px;
+    font-size: 16.9px;
     color: rgba(200, 200, 200, 0.2);
     text-transform: uppercase;
     transform: scaleY(-1);
@@ -215,33 +389,119 @@ body {
     right: 20px;
     background: transparent;
     padding: 10px 14px;
-    font-size: 16px;
+    font-size: 18.2px;
     color: #e61093;
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-family: monospace;
     z-index: 1000;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-shadow: 0 0 5px #e61093;
+    font-weight: normal;
+    letter-spacing: 1px;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
 }
 
 .real-time-clock #clockTime {
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
-    font-size: 16px;
+    font-family: monospace;
+    font-size: 18.2px;
     color: #e61093;
     display: inline-block;
-    min-width: 80px;
+    min-width: 200px;
     text-align: center;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* 音乐控制区域 */
+.music-controls {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1002;
+}
+
+.morse-music-button {
+    background: #171717FF;
+    border: none;
+    color: #e61093;
+    padding: 10px 14px;
+    font-size: 18px;
+    font-family: monospace;
+    cursor: pointer;
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+}
+
+.morse-music-button:hover {
+    background: #e61093;
+    color: #171717FF;
+}
+
+.morse-music-button:active {
+    background: #e61093;
+    color: #171717FF;
+    opacity: 0.9;
+}
+
+.morse-music-button.playing {
+    background: #e61093;
+    color: #171717FF;
+}
+
+.morse-music-button.playing .play-icon {
+    display: none;
+}
+
+.morse-music-button.playing .pause-icon {
+    display: inline !important;
+}
+
+.morse-music-button .pause-icon {
+    display: none;
+}
+
+/* 音量滑块 */
+.volume-slider {
+    width: 120px;
+    height: 4px;
+    background: rgba(230, 16, 147, 0.3);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #e61093;
+    cursor: pointer;
+    border: none;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #e61093;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
 }
 
 .chat-container {
     flex: 1;
     overflow-y: auto;
     padding: 24px;
-    background: #000000;
+    background: #171717FF;
     border: none;
 }
 
@@ -250,12 +510,12 @@ body {
 }
 
 .chat-container::-webkit-scrollbar-track {
-    background: #000000;
+    background: #171717FF;
 }
 
 .chat-container::-webkit-scrollbar-thumb {
     background: #e61093;
-    border: 1px solid #000000;
+    border: 1px solid #171717FF;
 }
 
 .message {
@@ -276,7 +536,7 @@ body {
 }
 
 .message-time {
-    font-size: 11px;
+    font-size: 14.3px;
     color: #666666;
     margin-bottom: 8px;
     text-align: center;
@@ -287,7 +547,7 @@ body {
     padding: 12px 0;
     word-wrap: break-word;
     line-height: 1.8;
-    font-size: 14px;
+    font-size: 18.2px;
     background: transparent;
     border: none;
     text-align: center;
@@ -308,7 +568,7 @@ body {
     padding: 12px 0;
     word-wrap: break-word;
     line-height: 1.8;
-    font-size: 14px;
+    font-size: 18.2px;
     background: transparent;
     border: none;
     text-align: center;
@@ -329,7 +589,8 @@ body {
 
 .input-container {
     padding: 20px 24px;
-    background: #000000;
+    background: #171717FF;
+    flex-shrink: 0;
 }
 
 .input-wrapper {
@@ -342,16 +603,16 @@ body {
     flex: 1;
     padding: 12px 16px;
     border: 2px solid #e61093;
-    background: #000000;
+    background: #171717FF;
     color: #e61093;
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
-    font-size: 14px;
+    font-family: monospace;
+    font-size: 18.2px;
     outline: none;
     text-transform: none;
 }
 
 .input-box::placeholder {
-    color: #996666;
+    color: #666666;
     text-transform: none;
 }
 
@@ -362,11 +623,11 @@ body {
 
 .send-button {
     padding: 12px 20px;
-    background: #000000;
+    background: #171717FF;
     color: #e61093;
     border: 2px solid #e61093;
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
-    font-size: 13px;
+    font-family: monospace;
+    font-size: 16.9px;
     cursor: pointer;
     text-transform: uppercase;
     transition: all 0.1s;
@@ -374,42 +635,91 @@ body {
 
 .send-button:hover:not(:disabled) {
     background: #e61093;
-    color: #000000;
+    color: #171717FF;
 }
 
 .send-button:active:not(:disabled) {
     background: #e61093;
-    color: #000000;
+    color: #171717FF;
     opacity: 0.9;
 }
 
 .send-button:disabled {
     opacity: 0.3;
     cursor: not-allowed;
-    background: #000000;
-    color: #996666;
-    border-color: #996666;
+    background: #171717FF;
+    color: #666666;
+    border-color: #666666;
 }
 
 .info-bar {
     padding: 10px 24px;
-    background: #000000;
+    background: #171717FF;
     color: #e61093;
-    font-size: 13px;
+    font-size: 16.9px;
     text-align: center;
     border-top: 1px solid #e61093;
     text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.progress-label {
+    color: #e61093;
+    font-size: 16.9px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.progress-bar-wrapper {
+    flex: 1;
+    height: 8px;
+    background: rgba(230, 16, 147, 0.2);
+    border: 1px solid rgba(230, 16, 147, 0.3);
+    position: relative;
+    overflow: hidden;
+    max-width: 300px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #e61093;
+    width: 0%;
+    transition: width 0.3s ease;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.progress-percent {
+    color: #e61093;
+    font-size: 16.9px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    min-width: 40px;
+    text-align: right;
+}
+
+.remaining-count-display {
+    display: block;
 }
 
 .archive-button {
     margin-top: 12px;
     width: 100%;
     padding: 14px;
-    background: #000000;
+    background: #171717FF;
     color: #e61093;
     border: 2px solid #e61093;
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
-    font-size: 13px;
+    font-family: monospace;
+    font-size: 16.9px;
     cursor: pointer;
     text-transform: uppercase;
     transition: all 0.1s;
@@ -417,28 +727,28 @@ body {
 
 .archive-button:hover:not(:disabled) {
     background: #e61093;
-    color: #000000;
+    color: #171717FF;
 }
 
 .archive-button:active:not(:disabled) {
     background: #e61093;
-    color: #000000;
+    color: #171717FF;
     opacity: 0.9;
 }
 
 .archive-button:disabled {
     opacity: 0.3;
     cursor: not-allowed;
-    background: #000000;
-    color: #996666;
-    border-color: #996666;
+    background: #171717FF;
+    color: #666666;
+    border-color: #666666;
 }
 
 .loading {
     display: inline-block;
     width: 8px;
     height: 8px;
-    border: 2px solid #000000;
+    border: 2px solid #171717FF;
     border-top-color: transparent;
     animation: spin 0.6s linear infinite;
     margin-left: 8px;
@@ -462,7 +772,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000000;
+    background: #171717FF;
     z-index: 2000;
     overflow-y: auto;
     display: flex;
@@ -489,7 +799,7 @@ body {
     width: 100%;
     max-width: 700px;
     min-height: 500px;
-    background: #000000;
+    background: #171717FF;
     padding: 60px 50px;
     box-sizing: border-box;
     display: flex;
@@ -668,11 +978,11 @@ body {
 }
 
 .book-page-title {
-    font-size: 18px;
+    font-size: 23.4px;
     color: #e61093;
     margin-bottom: 40px;
     text-align: center;
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-family: monospace;
     font-weight: normal;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -684,10 +994,10 @@ body {
 }
 
 .book-page-text {
-    font-size: 14px;
+    font-size: 18.2px;
     line-height: 2;
     color: #e0e0e0;
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-family: monospace;
     text-align: center;
     width: 100%;
     word-wrap: break-word;
@@ -704,9 +1014,9 @@ body {
     position: absolute;
     bottom: 20px;
     right: 30px;
-    font-size: 12px;
+    font-size: 15.6px;
     color: #e0e0e0;
-    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-family: monospace;
     z-index: 2;
     opacity: 0;
     transition: opacity 0.3s ease-in;
@@ -714,5 +1024,450 @@ body {
 
 .book-page-number.visible {
     opacity: 1;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+    /* 优化触摸体验 */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+
+    input, textarea, button {
+        -webkit-appearance: none;
+        appearance: none;
+        -webkit-border-radius: 0;
+        border-radius: 0;
+    }
+
+    body {
+        padding: 0;
+        font-size: 16px;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+
+    .container {
+        height: 100vh;
+        height: 100dvh; /* 动态视口高度，考虑移动端浏览器UI */
+        max-width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        padding: 15px 16px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .real-time-clock {
+        top: 1%;
+        right: 2%;
+        padding: 0.8% 1%;
+        font-size: 3.5vw;
+    }
+
+    .real-time-clock #clockTime {
+        font-size: 3.5vw;
+        min-width: 40vw;
+    }
+
+    .music-controls {
+        top: 2%;
+        left: 2%;
+        gap: 1%;
+    }
+
+    .morse-music-button {
+        padding: 0.8% 1%;
+        font-size: 3vw;
+        width: 8vw;
+        height: 8vw;
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+    .volume-slider {
+        width: 20vw;
+        max-width: 150px;
+    }
+
+    .comment-board-toggle {
+        right: 2%;
+        top: 12%;
+        padding: 0.8% 1%;
+        font-size: 3.2vw;
+    }
+
+    .comment-board {
+        position: fixed;
+        right: calc(-40% - 2%);
+        top: 15%;
+        width: 40%;
+        max-height: 60vh;
+        max-width: 350px;
+    }
+
+    .comment-board.show {
+        right: 2%;
+    }
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+    }
+
+    .vector-count {
+        top: 8%;
+        right: 2%;
+        padding: 0.8% 1%;
+        font-size: 3.2vw;
+    }
+
+    .vector-count span {
+        font-size: 15px;
+    }
+
+    .vector-count::after {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .archive-notification {
+        font-size: 12px;
+    }
+
+    .seed-decoration {
+        bottom: 3%;
+        left: 3%;
+        width: 15vw;
+        height: 15vw;
+        max-width: 80px;
+        max-height: 80px;
+    }
+
+    .chat-container {
+        padding: 2%;
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+        max-height: calc(100vh - 25%);
+        max-height: calc(100dvh - 25%);
+    }
+
+    .message {
+        margin-bottom: 16px;
+    }
+
+    .message-time {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .message-content {
+        max-width: 90%;
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    .thinking-indicator {
+        max-width: 90%;
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    .input-container {
+        padding: 1.5% 2%;
+        flex-shrink: 0;
+        background: #171717FF;
+        border-top: 1px solid rgba(230, 16, 147, 0.3);
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding-bottom: calc(1.5% + env(safe-area-inset-bottom));
+    }
+
+    .input-wrapper {
+        gap: 1.5%;
+    }
+
+    .input-box {
+        padding: 1.5% 2%;
+        font-size: 4vw;
+        /* 防止iOS Safari自动放大输入框 */
+        font-size: 16px !important;
+        min-height: 44px; /* 确保触摸目标足够大 */
+    }
+
+    .send-button {
+        padding: 1.5% 2.5%;
+        font-size: 3.5vw;
+        min-height: 44px; /* 确保触摸目标足够大 */
+    }
+
+    .info-bar {
+        padding: 6px 16px;
+        font-size: 13px;
+    }
+
+    .progress-container {
+        gap: 8px;
+    }
+
+    .progress-label {
+        font-size: 13px;
+    }
+
+    .progress-bar-wrapper {
+        max-width: 200px;
+        height: 6px;
+    }
+
+    .progress-percent {
+        font-size: 13px;
+        min-width: 35px;
+    }
+
+    .archive-button {
+        padding: 1.5%;
+        margin-top: 1.5%;
+        font-size: 3.2vw;
+        min-height: 44px; /* 确保触摸目标足够大 */
+    }
+
+    .book-page {
+        padding: 20px 10px;
+    }
+
+    .book-page-content {
+        padding: 30px 20px;
+        min-height: auto;
+    }
+
+    .book-page-title {
+        font-size: 20px;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+    }
+
+    .book-page-text {
+        font-size: 16px;
+        padding: 15px 0;
+    }
+
+    .book-page-number {
+        bottom: 15px;
+        right: 20px;
+        font-size: 13px;
+    }
+}
+
+/* 小屏幕手机适配（宽度小于480px） */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 0;
+        font-size: 14px;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+
+    .container {
+        height: 100vh;
+        height: 100dvh; /* 动态视口高度 */
+        max-width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        padding: 12px 12px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .real-time-clock {
+        top: 5px;
+        right: 5px;
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    .music-controls {
+        top: 10px;
+        left: 10px;
+        gap: 10px;
+    }
+
+    .morse-music-button {
+        padding: 8px 10px;
+        font-size: 16px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .volume-slider {
+        width: 100px;
+    }
+
+    .comment-board-toggle {
+        right: 5px;
+        top: 70px;
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+
+    .comment-board {
+        position: fixed;
+        right: -280px;
+        top: 100px;
+        width: 270px;
+        max-height: 400px;
+    }
+
+    .comment-board.show {
+        right: 5px;
+    }
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+    }
+
+    .real-time-clock #clockTime {
+        font-size: 12px;
+        min-width: 120px;
+    }
+
+    .vector-count {
+        top: 40px;
+        right: 5px;
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+
+    .vector-count span {
+        font-size: 13px;
+    }
+
+    .vector-count::after {
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+
+    .seed-decoration {
+        bottom: 15px;
+        left: 15px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .chat-container {
+        padding: 2%;
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+        max-height: calc(100vh - 25%);
+        max-height: calc(100dvh - 25%);
+    }
+
+    .message-content {
+        max-width: 95%;
+        font-size: 14px;
+    }
+
+    .thinking-indicator {
+        max-width: 95%;
+        font-size: 14px;
+    }
+
+    .input-container {
+        padding: 1.2% 1.5%;
+        flex-shrink: 0;
+        background: #171717;
+        border-top: 1px solid rgba(230, 16, 147, 0.3);
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding-bottom: calc(1.2% + env(safe-area-inset-bottom));
+    }
+
+    .input-box {
+        padding: 1.2% 1.5%;
+        font-size: 4vw;
+        /* 防止iOS Safari自动放大输入框 */
+        font-size: 16px !important;
+        min-height: 44px;
+    }
+
+    .send-button {
+        padding: 1.2% 2%;
+        font-size: 3vw;
+        min-height: 44px;
+    }
+
+    .info-bar {
+        padding: 5px 12px;
+        font-size: 11px;
+    }
+
+    .progress-container {
+        gap: 6px;
+    }
+
+    .progress-label {
+        font-size: 11px;
+    }
+
+    .progress-bar-wrapper {
+        max-width: 150px;
+        height: 5px;
+    }
+
+    .progress-percent {
+        font-size: 11px;
+        min-width: 30px;
+    }
+
+    .archive-button {
+        padding: 1.2%;
+        margin-top: 1.2%;
+        font-size: 2.8vw;
+        min-height: 44px;
+    }
+
+    .book-page-content {
+        padding: 20px 15px;
+    }
+
+    .book-page-title {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .book-page-text {
+        font-size: 14px;
+    }
 }
 
